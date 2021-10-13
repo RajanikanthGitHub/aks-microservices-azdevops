@@ -33,11 +33,6 @@ steps:
     backendAzureRmContainerName: 'aksstoragecontainer001'
     backendAzureRmKey: 'k8.tfstate'
 
-- task: TerraformInstaller@0
-  inputs:
-    terraformVersion: 'latest'
-    downloadUrl: 'https://www.terraform.io/downloads.html'
-
 - task: TerraformCLI@0
   displayName: "Terraform plan"
   inputs:
