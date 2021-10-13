@@ -32,6 +32,7 @@ steps:
     backendAzureRmStorageAccountName: 'backendstorageforaks'
     backendAzureRmContainerName: 'aksstoragecontainer001'
     backendAzureRmKey: 'k8.tfstate'
+    allowTelemetryCollection: true
 
 - task: TerraformCLI@0
   displayName: "Terraform plan"
@@ -39,9 +40,8 @@ steps:
     command: 'plan'
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure'
     environmentServiceName: 'aks-microservice-sp'
-    allowTelemetryCollection: false
     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-
+    allowTelemetryCollection: true
 - task: TerraformCLI@0
   displayName: "Terraform apply"
   inputs:
@@ -49,4 +49,4 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure'
     environmentServiceName: 'aks-microservice-sp'
     commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
-    
+    allowTelemetryCollection: true
