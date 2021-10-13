@@ -1,0 +1,23 @@
+https://learnk8s.io/terraform-aks
+
+CICD using Azure DevOps Pipeline, Terraform and AKS | Deploy Microservice in Kubernetes Part 1/2
+https://www.youtube.com/watch?v=U5Ti0LjxvLE&t=943s&ab_channel=kmajumder
+
+Deploy Microservice in Kubernetes (AKS) using Azure DevOps Pipeline Part 2/2
+https://www.youtube.com/watch?v=e0kSNSN6idE&t=36s&ab_channel=kmajumder
+
+
+D:\Practice\terraform-azure\CreateAzureAdServicePrinciple\for_an_application>terraform plan
+╷
+│ Error: Value for unconfigurable attribute
+│
+│   with azuread_service_principal_password.example,
+│   on main.tf line 21, in resource "azuread_service_principal_password" "example":
+│   21:   value = random_string.password.result
+│
+│ Can't configure a value for "value": its value will be decided automatically based on the result of applying this
+│ configuration.
+
+Azure DevOps
+dev.azure.com/
+Organisation -> Project Settings -> Service Connections:
