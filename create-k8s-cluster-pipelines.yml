@@ -10,10 +10,42 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
+- script: echo K8S Terraform Azure !!!
   displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: DownloadSecureFile@1
+  displayName: "Download ssh-key value"
+  name: publickey
+  inputs:
+    secureFile: 'azure_rsa.pub'
+
+- task: TerraformCLI@0
+  displayName: "Terraform init"
+  inputs:
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure'
+    backendType: 'azurerm'
+    backendServiceArm: 'aks-microservice-sp'
+    ensureBackend: true
+    backendAzureRmResourceGroupName: 'backend-rsg'
+    backendAzureRmResourceGroupLocation: 'West Europe'
+    backendAzureRmStorageAccountName: 'backendstorageforaks'
+    backendAzureRmContainerName: 'aksstoragecontainer001'
+    backendAzureRmKey: 'k8.tfstate'
+
+- task: TerraformCLI@0
+  displayName: "Terraform plan"
+  inputs:
+    command: 'plan'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure'
+    environmentServiceName: 'aks-microservice-sp'
+    allowTelemetryCollection: false
+
+- task: TerraformCLI@0
+  displayName: "Terraform apply"
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/configuration/iaac/azure'
+    environmentServiceName: 'aks-microservice-sp'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
+    
