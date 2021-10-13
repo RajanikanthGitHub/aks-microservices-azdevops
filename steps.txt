@@ -6,6 +6,8 @@ https://www.youtube.com/watch?v=U5Ti0LjxvLE&t=943s&ab_channel=kmajumder
 Deploy Microservice in Kubernetes (AKS) using Azure DevOps Pipeline Part 2/2
 https://www.youtube.com/watch?v=e0kSNSN6idE&t=36s&ab_channel=kmajumder
 
+https://github.com/kousikm/azure-devops-terraform-k8s-pipeline
+
 
 D:\Practice\terraform-azure\CreateAzureAdServicePrinciple\for_an_application>terraform plan
 ╷
@@ -19,5 +21,23 @@ D:\Practice\terraform-azure\CreateAzureAdServicePrinciple\for_an_application>ter
 │ configuration.
 
 Azure DevOps
+####################
 dev.azure.com/
 Organisation -> Project Settings -> Service Connections:
+for SP:
+------
+new service connection -> Azure Resource Manager -> service prinicipal (automatic) -> 
+subscription : Free Trail
+Service Connection Name: SC-for-aks-microservice-sp
+
+github:
+-------
+
+Docker Registry:
+--------------
+docker hub
+
+......................................................
+
+pipeline:
+new -> github -> repo -> starter pipeline -> create-k8s-cluster-pipelines.yml 
